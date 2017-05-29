@@ -43,49 +43,18 @@ extension CGPoint {
     }
 }
 
-//    let sprite = SKSpriteNode(imageNamed: "Lizzie1.png")
-//    sprite.position = CGPoint(x: size.width * 0.8, y: size.height * 0.5)
-//    addChild(sprite)
-//    
-//    let atlas = SKTextureAtlas(named: "Lizzie")
-//    let liz1 = atlas.textureNamed("Lizzie1.png")
-//    let liz2 = atlas.textureNamed("Lizzie2.png")
-//    
-//    let textures = [liz1, liz2]
-//    let lizAnimation = SKAction.animate(with: textures, timePerFrame: 0.5)
-//    
-//    sprite.run(SKAction.repeatForever(lizAnimation))
-
 
 class GameScene: SKScene {
     
-//    var lizzie_right = SKSpriteNode(imageNamed: "liz_right")
-//    let lizzie_right_feetclosed = SKSpriteNode(imageNamed: "liz_right_feet_closed")
-//    let lizzie_left = SKSpriteNode(imageNamed: "liz_left")
-    
-    var facingRight = true
+
+//    var facingRight = true
     let tempPlayer:Player = Player()
 
     override func didMove(to view: SKView) {
         backgroundColor = SKColor.gray
-//        lizzie_right.position = CGPoint(x: size.width * 0.8, y: size.height * 0.5)
-//        addChild(lizzie_right)
-        
-        
+
         tempPlayer.position = CGPoint(x: size.width * 0.8, y: size.height * 0.5)
         addChild(tempPlayer)
-  
-        
-    }
-    
-
-    func moveSpriteToDest(sprite: SKSpriteNode, dest: CGPoint) {
-        let actionMove = SKAction.move(to: dest, duration: 1.0)
-        sprite.run(SKAction.sequence([actionMove]))
-    }
-    
-    func isSpriteIsInPosition(sprite: SKSpriteNode, pos: CGPoint) -> Bool {
-        return sprite.position != pos
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -94,19 +63,15 @@ class GameScene: SKScene {
             return
         }
         let touchLocation = touch.location(in: self)
-//        let remove = SKAction.removeFromParent()
 
  
         // if touch behind lizzie, turn her around
         var offset : CGPoint
 
-//        tempPlayer.removeAllActions()
         offset = touchLocation - tempPlayer.position
         
         let realDest = touchLocation
         tempPlayer.walkToDest(dest: realDest)
-//        moveSpriteToDest(sprite: tempPlayer, dest: realDest)
-        
         
 //        // if touch behind lizzie, turn her around
 //        var offset : CGPoint
