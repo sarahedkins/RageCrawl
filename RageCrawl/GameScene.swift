@@ -46,15 +46,21 @@ extension CGPoint {
 
 class GameScene: SKScene {
     
+    let playerOne:Player = Player()
+    let dPad:DirectionalPad = DirectionalPad()
+    let buttonRight:Button = Button()
 
-//    var facingRight = true
-    let tempPlayer:Player = Player()
 
     override func didMove(to view: SKView) {
         backgroundColor = SKColor.gray
-
-        tempPlayer.position = CGPoint(x: size.width * 0.8, y: size.height * 0.5)
-        addChild(tempPlayer)
+        playerOne.position = CGPoint(x: size.width * 0.8, y: size.height * 0.5)
+        addChild(playerOne)
+        
+        dPad.position = CGPoint(x: size.width * 0.1, y: size.height * 0.1)
+        addChild(dPad)
+        
+        buttonRight.position = CGPoint(x: size.width * 0.9, y: size.height * 0.1)
+        addChild(buttonRight)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -63,42 +69,18 @@ class GameScene: SKScene {
             return
         }
         let touchLocation = touch.location(in: self)
-
- 
-        // if touch behind lizzie, turn her around
-        var offset : CGPoint
-
-        offset = touchLocation - tempPlayer.position
         
-        let realDest = touchLocation
-        tempPlayer.walkToDest(dest: realDest)
+        playerOne.removeAllActions()
         
-//        // if touch behind lizzie, turn her around
-//        var offset : CGPoint
-//        if (facingRight) {
-//            lizzie_right.removeAllActions()
-//            offset = touchLocation - lizzie_right.position
-//        } else {
-//            lizzie_left.removeAllActions()
-//            offset = touchLocation - lizzie_left.position
-//        }
-//        
-//        if (offset.x < 0 && facingRight) { // swap to face left
-//            facingRight = false
-//            lizzie_left.position = lizzie_right.position
-//            lizzie_right.run(SKAction.sequence([remove]))
-//            addChild(lizzie_left)
-//            
-//        } else if (offset.x >= 0 && !facingRight) { // swap to face right
-//            facingRight = true
-//            lizzie_right.position = lizzie_left.position
-//            lizzie_left.run(SKAction.sequence([remove]))
-//            addChild(lizzie_right)
-//        }
-//        
-//        let realDest = touchLocation
-//        facingRight ?
-//            moveSpriteToDest(sprite: lizzie_right, dest: realDest) :
-//            moveSpriteToDest(sprite: lizzie_left, dest: realDest)
+        var multiplierForDirection : CGFloat
+        if (touchLocation.x <= self.frame.midX) {
+            multiplierForDirection = -1.0
+        } else {
+            multiplierForDirection = 1.0
+        }
+        
+        playerOne.xScale = fabs(playerOne.xScale) * multiplierForDirection
+        playerOne.walkToDest(dest: touchLocation)
+        
     }
 }
