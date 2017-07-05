@@ -47,8 +47,8 @@ extension CGPoint {
 class GameScene: SKScene {
     
     let playerOne:Player = Player()
-    let dPad:DirectionalPad = DirectionalPad()
-    let buttonRight:Button = Button()
+//    let dPad:DirectionalPad = DirectionalPad()
+//    let buttonRight:Button = Button()
 
 
     override func didMove(to view: SKView) {
@@ -56,11 +56,11 @@ class GameScene: SKScene {
         playerOne.position = CGPoint(x: size.width * 0.8, y: size.height * 0.5)
         addChild(playerOne)
         
-        dPad.position = CGPoint(x: size.width * 0.1, y: size.height * 0.1)
-        addChild(dPad)
+//        dPad.position = CGPoint(x: size.width * 0.1, y: size.height * 0.1)
+//        addChild(dPad)
         
-        buttonRight.position = CGPoint(x: size.width * 0.9, y: size.height * 0.1)
-        addChild(buttonRight)
+//        buttonRight.position = CGPoint(x: size.width * 0.9, y: size.height * 0.1)
+//        addChild(buttonRight)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

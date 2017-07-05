@@ -11,6 +11,14 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
+    @IBAction func hello(_ sender: Any) {
+        print ("HELLO")
+    }
+    
+    @IBAction func world(_ sender: Any) {
+        print ("WORLD")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let scene = GameScene(size: view.bounds.size)
