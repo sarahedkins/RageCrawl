@@ -18,8 +18,10 @@
 		5F4C922D1EDCDB0B004A2529 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4C922C1EDCDB0B004A2529 /* Button.swift */; };
 		5F4C92311EDCE017004A2529 /* DirectionalPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4C92301EDCE017004A2529 /* DirectionalPad.swift */; };
 		5FDAFCBF202CB9DA009576DA /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAFCBE202CB9DA009576DA /* Building.swift */; };
-		5FDAFCC3202FC737009576DA /* lizziepunch.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5FDAFCC2202FC737009576DA /* lizziepunch.atlas */; };
 		5FDAFCC5202FE8BD009576DA /* LizziePunch.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5FDAFCC4202FE8BD009576DA /* LizziePunch.atlas */; };
+		5FDAFCC72030D2D3009576DA /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAFCC62030D2D3009576DA /* Window.swift */; };
+		5FDAFCC920310F62009576DA /* WindowCracking.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5FDAFCC820310F62009576DA /* WindowCracking.atlas */; };
+		5FDAFCCB20313700009576DA /* Smoke.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5FDAFCCA20313700009576DA /* Smoke.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,8 +38,10 @@
 		5F4C922C1EDCDB0B004A2529 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		5F4C92301EDCE017004A2529 /* DirectionalPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionalPad.swift; sourceTree = "<group>"; };
 		5FDAFCBE202CB9DA009576DA /* Building.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
-		5FDAFCC2202FC737009576DA /* lizziepunch.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = lizziepunch.atlas; sourceTree = "<group>"; };
 		5FDAFCC4202FE8BD009576DA /* LizziePunch.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = LizziePunch.atlas; path = "../../../../Desktop/Game Art/LizziePunch.atlas"; sourceTree = "<group>"; };
+		5FDAFCC62030D2D3009576DA /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		5FDAFCC820310F62009576DA /* WindowCracking.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = WindowCracking.atlas; sourceTree = "<group>"; };
+		5FDAFCCA20313700009576DA /* Smoke.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Smoke.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,8 +74,9 @@
 		5F4C920E1EDB5866004A2529 /* RageCrawl */ = {
 			isa = PBXGroup;
 			children = (
+				5FDAFCCA20313700009576DA /* Smoke.atlas */,
+				5FDAFCC820310F62009576DA /* WindowCracking.atlas */,
 				5FDAFCC4202FE8BD009576DA /* LizziePunch.atlas */,
-				5FDAFCC2202FC737009576DA /* lizziepunch.atlas */,
 				5F4C92281EDB84BE004A2529 /* Lizzie.atlas */,
 				5F4C920F1EDB5866004A2529 /* AppDelegate.swift */,
 				5F4C92151EDB5866004A2529 /* GameScene.swift */,
@@ -84,6 +89,7 @@
 				5F4C921E1EDB5866004A2529 /* LaunchScreen.storyboard */,
 				5F4C92211EDB5866004A2529 /* Info.plist */,
 				5FDAFCBE202CB9DA009576DA /* Building.swift */,
+				5FDAFCC62030D2D3009576DA /* Window.swift */,
 			);
 			path = RageCrawl;
 			sourceTree = "<group>";
@@ -149,11 +155,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F4C921B1EDB5866004A2529 /* Main.storyboard in Resources */,
-				5FDAFCC3202FC737009576DA /* lizziepunch.atlas in Resources */,
 				5F4C921D1EDB5866004A2529 /* Assets.xcassets in Resources */,
 				5FDAFCC5202FE8BD009576DA /* LizziePunch.atlas in Resources */,
 				5F4C92291EDB84BE004A2529 /* Lizzie.atlas in Resources */,
+				5FDAFCCB20313700009576DA /* Smoke.atlas in Resources */,
 				5F4C92201EDB5866004A2529 /* LaunchScreen.storyboard in Resources */,
+				5FDAFCC920310F62009576DA /* WindowCracking.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +178,7 @@
 				5F4C92181EDB5866004A2529 /* GameViewController.swift in Sources */,
 				5F4C92101EDB5866004A2529 /* AppDelegate.swift in Sources */,
 				5FDAFCBF202CB9DA009576DA /* Building.swift in Sources */,
+				5FDAFCC72030D2D3009576DA /* Window.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

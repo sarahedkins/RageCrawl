@@ -32,10 +32,16 @@ class Player: SKSpriteNode {
     }
     
     func punch() {
-        let textureAtlas = SKTextureAtlas(named: "LizziePunch")
-        let frames = ["liz_punch1", "liz_punch3", "liz_punch3", "liz_punch3", "liz_punch4", "liz_punch4"].map { textureAtlas.textureNamed($0) }
-        let animate = SKAction.animate(with: frames, timePerFrame: punchSpeed)
-        self.run(animate)
+        if let _ = self.action(forKey: "Punch") {
+            // action is running
+            return
+        } else {
+            // action is not running
+            let textureAtlas = SKTextureAtlas(named: "LizziePunch")
+            let frames = ["liz_punch1", "liz_punch3", "liz_punch3", "liz_punch4"].map { textureAtlas.textureNamed($0) }
+            let animate = SKAction.animate(with: frames, timePerFrame: punchSpeed)
+            self.run(animate, withKey: "Punch")
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

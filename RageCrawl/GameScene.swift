@@ -43,9 +43,12 @@ extension CGPoint {
     }
 }
 
-func getXRangeOfBuilding(building:Building) -> (CGFloat, CGFloat) {
-    let halfWidth = (building.size.width / 2)
-    return (building.position.x - halfWidth, building.position.x + halfWidth)
+func getPointsOfWindow(window:Window) -> [(CGFloat, CGFloat)] {
+    let halfWidth = (window.size.width / 2)
+    let halfHeight = (window.size.height / 2)
+    let xRange = (window.position.x - halfWidth, window.position.x + halfWidth)
+    let yRange = (window.position.y - halfHeight, window.position.y + halfHeight)
+    return [xRange, yRange]
 }
 
 class GameScene: SKScene {
@@ -56,7 +59,7 @@ class GameScene: SKScene {
     var buildings:[Building] = []
 
     override func didMove(to view: SKView) {
-        // backgroundColor = SKColor.gray
+        // Create Background
         let background = SKSpriteNode(imageNamed: "RageCrawlBackground1")
         background.zPosition = 0
         background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
@@ -65,29 +68,28 @@ class GameScene: SKScene {
         // Create Buildings
         building1.position = CGPoint(x: size.width * 0.5, y: size.height * 0.45)
         building1.zPosition = 1
+        building1.name = "Building1"
         addChild(building1)
         buildings.append(building1)
         
         building2.position = CGPoint(x: size.width * 0.3, y: size.height * 0.45)
         building2.zPosition = 1
+        building2.name = "Building2"
         addChild(building2)
         buildings.append(building2)
         
         // Create Player
         playerOne.position = CGPoint(x: size.width * 0.8, y: size.height * 0.4)
-        playerOne.zPosition = 2
+        playerOne.zPosition = 3
         addChild(playerOne)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touchCount = touches.count
+//        let touchCount = touches.count
         guard let touch = touches.first else {
             return
         }
         let tapCount = touch.tapCount
-        
-        print("touches", touchCount)
-        print("taps", tapCount)
         
         switch tapCount {
             case 1:
@@ -104,6 +106,13 @@ class GameScene: SKScene {
                 playerOne.xScale = fabs(playerOne.xScale) * multiplierForDirection
                 playerOne.walkToDest(dest: touchLocation)
             default:
+                let positionInScene = touch.location(in: self)
+                let touchedNode = self.atPoint(positionInScene)
+                
+                if touchedNode is Window {
+                    let window = touchedNode as! Window
+                    window.takeDamage()
+                }
                 playerOne.punch()
         }
         
