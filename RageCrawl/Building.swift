@@ -19,9 +19,14 @@ class Building: SKSpriteNode {
     let windowCenterSpace = 49
     let windowVerticalSpace = 55
     var windows:[Window] = []
-    
-    init() {
-        let texture = SKTexture(imageNamed: "BrickBuildingWithTrim.png")
+    let smokeSpeed = 0.5
+    let puffSpeed = 0.4
+    let buildingImage = "BrickBuildingWithTrim.png"
+    var parentScene: GameScene
+
+    init(scene: GameScene) {
+        let texture = SKTexture(imageNamed: buildingImage)
+        parentScene = scene
         super.init(texture: texture, color: .clear, size: texture.size())
         
         // Set up windows on the building
@@ -52,22 +57,36 @@ class Building: SKSpriteNode {
         }
     }
     
+    func notifyGameScene(state: String) {
+        parentScene.buildingCollapsed(name: self.name!, state: state)
+    }
+    
     func takeDamage() {
         // TODO - update sprite with more damaged one
         print("BUILDING TAKING DAMAGE!")
     }
     
     func collapse() {
-        print("BUILDING SHOULD FALL NOW!!")
-        
-        // TODO - atlas of smoking clouds and rumble at base
-        // translate building sprite down and hidden somehow
-        let smokeSpeed = 1.0
-        
         let textureAtlas = SKTextureAtlas(named: "Smoke")
         let frames = ["smoke1", "smoke2", "smoke3", "smoke2", "smoke3", "smoke4", "smoke5"].map { textureAtlas.textureNamed($0) }
-        let animate = SKAction.animate(with: frames, timePerFrame: smokeSpeed)
-        self.run(animate)
+        let frames_puffing = ["smoke4", "smoke5"].map { textureAtlas.textureNamed($0) }
+        let billow = SKAction.animate(with: frames, timePerFrame: smokeSpeed)
+        let puffing = SKAction.animate(with: frames_puffing, timePerFrame: puffSpeed)
+        let repeatPuffing = SKAction.repeat(puffing, count: 5)
+        let group = SKAction.sequence([billow,repeatPuffing])
+        let texture = SKTexture(imageNamed: buildingImage)
+        let smokenode = SKSpriteNode(texture: texture, color: .clear, size: texture.size())
+        smokenode.zPosition = 2
+        self.addChild(smokenode)
+        smokenode.run(group, completion: {
+            () -> Void in
+                self.notifyGameScene(state: "collapse")
+                smokenode.removeFromParent()
+                for window in self.windows {
+                    window.removeFromParent()
+                }
+                self.texture = SKTexture(imageNamed: "brickbuildingrubble1")
+        })
     }
     
     func windowUpdate(state: String) {

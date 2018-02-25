@@ -5,7 +5,6 @@
 //  Created by Sarah Edkins on 5/28/17.
 //  Copyright © 2017 Sarah Edkins. All rights reserved.
 //
-
 import SpriteKit
 
 var liz : SKSpriteNode!
@@ -54,18 +53,24 @@ func getPointsOfWindow(window:Window) -> [(CGFloat, CGFloat)] {
 class GameScene: SKScene {
     
     let playerOne:Player = Player()
-    let building1:Building = Building()
-    let building2:Building = Building()
     var buildings:[Building] = []
+    let gameFont: String = "TamilSangamMN-Bold"
+    let timer: TimerLabel = TimerLabel(fontNamed: "TamilSangamMN-Bold")
+    
+    func buildingCollapsed(name: String, state: String) {
+        print("BUILDING COLLAPSED!!! name:", name, "state:", state)
+    }
 
     override func didMove(to view: SKView) {
         // Create Background
-        let background = SKSpriteNode(imageNamed: "RageCrawlBackground1")
+        let background = SKSpriteNode(imageNamed: "SidewalkBackground1")
         background.zPosition = 0
         background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         addChild(background)
         
         // Create Buildings
+        let building1:Building = Building(scene: self)
+        let building2:Building = Building(scene: self)
         building1.position = CGPoint(x: size.width * 0.5, y: size.height * 0.45)
         building1.zPosition = 1
         building1.name = "Building1"
@@ -81,7 +86,19 @@ class GameScene: SKScene {
         // Create Player
         playerOne.position = CGPoint(x: size.width * 0.8, y: size.height * 0.4)
         playerOne.zPosition = 3
+        playerOne.isUserInteractionEnabled = false
         addChild(playerOne)
+        
+        // Create Timer
+        timer.fontSize = 20
+        timer.fontColor = SKColor.magenta
+        timer.position = CGPoint(x: 70, y: size.height - 30)
+        addChild(timer)
+        timer.startWithDuration(duration: 30)
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        timer.update()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -105,10 +122,9 @@ class GameScene: SKScene {
                 touchLocation.y = size.height * 0.4 // Fixed plane
                 playerOne.xScale = fabs(playerOne.xScale) * multiplierForDirection
                 playerOne.walkToDest(dest: touchLocation)
-            default:
+            default: // double tap
                 let positionInScene = touch.location(in: self)
                 let touchedNode = self.atPoint(positionInScene)
-                
                 if touchedNode is Window {
                     let window = touchedNode as! Window
                     window.takeDamage()

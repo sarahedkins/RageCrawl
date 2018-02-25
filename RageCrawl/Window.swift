@@ -11,25 +11,6 @@ import SpriteKit
 
 
 class Window: SKSpriteNode {
-    
-//    var observers: [Observer] = []
-//    var state: String {
-//        didSet {
-//            notify()
-//        }
-//    }
-//    init(state: String) {
-//        self.state = state
-//    }
-//    func attach(observer: Observer) {
-//        observers.append(observer)
-//    }
-//    func notify() {
-//        for observer in observers {
-//            observer.update()
-//        }
-//    }
-    
     var currentDamage = "None"
     let imageNames = ["WindowCrack1", "WindowCrack2"]
     var onFire = false
